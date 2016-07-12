@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -15,11 +16,60 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6A-C5-Qfh">
+                                <rect key="frame" x="100" y="144" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="oneEditingEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Y9G-8F-gqn"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eC4-jC-G7F">
+                                <rect key="frame" x="370" y="144" width="97" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="oneBoxBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="5lg-97-oBT"/>
+                                    <action selector="twoBoxBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="r0d-v5-ObP"/>
+                                    <action selector="twoEditingEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="pZ7-Tj-K8Z"/>
+                                </connections>
+                            </textField>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QP7-7s-eRB">
+                                <rect key="frame" x="361" y="206" width="180" height="86"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="3WD-2P-z9L"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="4uN-sh-v7t"/>
+                                </connections>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwu-wT-Izf">
+                                <rect key="frame" x="436" y="438" width="53" height="30"/>
+                                <state key="normal" title="Refresh"/>
+                                <connections>
+                                    <action selector="refreshPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bZZ-iQ-6vT"/>
+                                </connections>
+                            </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nub-IL-Nmt">
+                                <rect key="frame" x="82" y="206" width="183" height="86"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="jEg-5y-2lU"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="sLP-om-nSX"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="pickerOne" destination="nub-IL-Nmt" id="mtY-rr-bgJ"/>
+                        <outlet property="pickerTwo" destination="QP7-7s-eRB" id="2Za-1F-oRf"/>
+                        <outlet property="refreshButton" destination="Gwu-wT-Izf" id="36X-2n-EIS"/>
+                        <outlet property="textBoxOne" destination="s6A-C5-Qfh" id="v9D-FX-Kr1"/>
+                        <outlet property="textBoxTwo" destination="eC4-jC-G7F" id="2EO-Rd-JfW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="305" y="361"/>
         </scene>
     </scenes>
 </document>
