@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.listofCurrencies = [[NSArray alloc]  initWithObjects: @"select", @"US dollar", @"Euro", @"Japanese Yen", @"British Pound",@"Norwegian krone", nil];
+    self.listofCurrencies = [[NSArray alloc]  initWithObjects: @"select", @"US dollar", @"Euro", @"British Pound", @"Japanese Yen", @"Norwegian krone", nil];
     [self.textBoxOne setKeyboardType: UIKeyboardTypeDecimalPad];
     [self.textBoxTwo setKeyboardType: UIKeyboardTypeDecimalPad];
     self.pickerOne.tag = 1;
@@ -97,8 +97,11 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView.tag==1) {
-       
-        //code for first pickerview **ADD Element
+     
+        [[[CurrencyConverter converterExists] exr] home] = [[ExchangeRate currencyArray] objectAtIndex:(row+1)];
+        
+        
+        //code for first pickerview
         
     }else if(pickerView.tag==2){
         

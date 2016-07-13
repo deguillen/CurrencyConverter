@@ -7,14 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ExchangeRate.h"
 @interface CurrencyConverter : NSObject
 
 +(CurrencyConverter*) converterExists;
+
+-(NSString*) convertCurrency;
+
 @property (strong, nonatomic) NSNumber* firstValue;
 @property (strong, nonatomic) NSNumber* secondValue;
-@property (strong, nonatomic) NSNumber* firstCurrency;
-@property (strong, nonatomic) NSNumber* secondCurrency; 
+@property (strong, nonatomic) ExchangeRate* exr;
 
 
 @end

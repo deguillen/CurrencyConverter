@@ -4,15 +4,14 @@
 //
 //  Created by Daniela Guillen on 7/12/16.
 //  Copyright © 2016 Daniela Guillen. All rights reserved.
-//
+// DELETE THIS 
 
 #import "CurrencyConverter.h"
 
 @implementation CurrencyConverter
 @synthesize firstValue;
 @synthesize secondValue;
-@synthesize firstCurrency;
-@synthesize secondCurrency;
+
 
 static CurrencyConverter* converter;
 
@@ -26,4 +25,9 @@ static CurrencyConverter* converter;
         return converter;
     
 }
+
+
+
+
+
 @end
