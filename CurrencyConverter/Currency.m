@@ -11,6 +11,7 @@
 @implementation Currency
 
 +(Currency*) initWithName: (NSString*) aName code: (NSString*) aCode symbol: (NSString*) aSymbol decimalPlaces: (NSNumber*) aPlace {
+    
     Currency* curr = [[Currency alloc] init];
     curr.name = aName;
     curr.alphaCode = aCode;

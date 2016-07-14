@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Currency : NSObject <NSCoding>
+@interface Currency : NSObject 
 
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSString* alphaCode;

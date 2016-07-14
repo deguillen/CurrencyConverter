@@ -11,12 +11,13 @@
 @interface CurrencyConverter : NSObject
 
 +(CurrencyConverter*) converterExists;
+-(NSString*) convert:(NSNumber*) n ;
 
--(NSString*) convertCurrency;
 
-@property (strong, nonatomic) NSNumber* firstValue;
-@property (strong, nonatomic) NSNumber* secondValue;
 @property (strong, nonatomic) ExchangeRate* exr;
-
+@property (strong, nonatomic) NSNumber* firstCurrency;
+@property (strong, nonatomic) NSNumber* secondCurrency;
 
 @end
+
+

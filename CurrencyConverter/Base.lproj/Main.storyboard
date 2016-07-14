@@ -18,44 +18,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s6A-C5-Qfh">
-                                <rect key="frame" x="26" y="52" width="150" height="30"/>
+                                <rect key="frame" x="26" y="52" width="165" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="oneEditingEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="Y9G-8F-gqn"/>
+                                    <action selector="edit:" destination="BYZ-38-t0r" eventType="editingChanged" id="9Pv-gV-ALI"/>
                                 </connections>
                             </textField>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QP7-7s-eRB">
-                                <rect key="frame" x="26" y="285" width="180" height="86"/>
+                                <rect key="frame" x="21" y="235" width="180" height="86"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="3WD-2P-z9L"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="4uN-sh-v7t"/>
                                 </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwu-wT-Izf">
-                                <rect key="frame" x="85" y="391" width="53" height="30"/>
+                                <rect key="frame" x="85" y="431" width="53" height="30"/>
                                 <state key="normal" title="Refresh"/>
                                 <connections>
                                     <action selector="refreshPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bZZ-iQ-6vT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gfw-bu-AfU">
+                                <rect key="frame" x="49" y="366" width="142" height="50"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nub-IL-Nmt">
-                                <rect key="frame" x="20" y="102" width="183" height="86"/>
+                                <rect key="frame" x="8" y="102" width="183" height="86"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="jEg-5y-2lU"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="sLP-om-nSX"/>
                                 </connections>
                             </pickerView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eC4-jC-G7F">
-                                <rect key="frame" x="20" y="234" width="171" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="oneBoxBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="5lg-97-oBT"/>
-                                    <action selector="twoBoxBegin:" destination="BYZ-38-t0r" eventType="editingDidBegin" id="r0d-v5-ObP"/>
-                                    <action selector="twoEditingEnd:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="pZ7-Tj-K8Z"/>
-                                </connections>
-                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -63,8 +59,8 @@
                         <outlet property="pickerOne" destination="nub-IL-Nmt" id="mtY-rr-bgJ"/>
                         <outlet property="pickerTwo" destination="QP7-7s-eRB" id="2Za-1F-oRf"/>
                         <outlet property="refreshButton" destination="Gwu-wT-Izf" id="36X-2n-EIS"/>
+                        <outlet property="resultLabel" destination="Gfw-bu-AfU" id="fzo-lw-aIg"/>
                         <outlet property="textBoxOne" destination="s6A-C5-Qfh" id="v9D-FX-Kr1"/>
-                        <outlet property="textBoxTwo" destination="eC4-jC-G7F" id="2EO-Rd-JfW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

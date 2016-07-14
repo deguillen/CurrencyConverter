@@ -12,14 +12,14 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *textBoxOne;
 
-@property (weak, nonatomic) IBOutlet UITextField *textBoxTwo;
 
 @property (weak, nonatomic) IBOutlet UIButton *refreshButton;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerOne;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerTwo;
-@property (strong, nonatomic) NSArray* listofCurrencies; 
+
+@property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
 @end
 

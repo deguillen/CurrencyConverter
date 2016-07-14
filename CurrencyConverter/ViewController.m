@@ -17,12 +17,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.listofCurrencies = [[NSArray alloc]  initWithObjects: @"select", @"US dollar", @"Euro", @"British Pound", @"Japanese Yen", @"Norwegian krone", nil];
+   
     [self.textBoxOne setKeyboardType: UIKeyboardTypeDecimalPad];
-    [self.textBoxTwo setKeyboardType: UIKeyboardTypeDecimalPad];
+   
     self.pickerOne.tag = 1;
     self.pickerTwo.tag = 2;
-    
+    [[CurrencyConverter converterExists] setFirstCurrency:[NSNumber numberWithLong:0]];
+    [[CurrencyConverter converterExists] setSecondCurrency:[NSNumber numberWithLong:0]];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -34,10 +35,10 @@
     return 1;
 }
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [self.listofCurrencies count];
+    return [[ExchangeRate currencyArray] count];
 }
 - (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component __TVOS_PROHIBITED {
-    return [self.listofCurrencies objectAtIndex:(row)];
+    return [[[ExchangeRate currencyArray] objectAtIndex:(row)] name];
 }
 
 - (IBAction)refreshPressed:(id)sender {
@@ -50,60 +51,26 @@
     if([self.textBoxOne isFirstResponder]) {
         [self.textBoxOne resignFirstResponder];
     }
-    if([self.textBoxTwo isFirstResponder]) {
-        [self.textBoxTwo resignFirstResponder];
-    }
+    
     else {
-        NSLog(@"error...no first responder");
+        NSLog(@"no first responder");
     }
 }
 
-- (IBAction)oneEditingEnd:(id)sender {
-    int deci = 0;
-    for (int count =1; count <= ([self.textBoxOne.text length] ); count++) {
-        if([self.textBoxOne.text characterAtIndex:count-1] == '.') {
-            deci++;
-            
-        }
-        
-    }
-    if(deci > 1) {
-        [self.textBoxOne setText: @""];
-    }
-    else {
-        [[CurrencyConverter converterExists] setFirstValue: [NSNumber numberWithDouble:[self.textBoxOne.text doubleValue]]];
-        //code to get value from textbox
-    }
-}
 
-- (IBAction)twoEditingEnd:(id)sender {
-    int deci = 0;
-    for (int count =1; count <= ([self.textBoxTwo.text length] ); count++) {
-        if([self.textBoxTwo.text characterAtIndex:count-1] == '.') {
-            deci++;
-            
-        }
-        
-    }
-    if(deci > 1) {
-        [self.textBoxTwo setText: @""];
-    }
-    else {
-        [[CurrencyConverter converterExists] setSecondValue: [NSNumber numberWithDouble:[self.textBoxTwo.text doubleValue]]];
-        //code to get value from textbox
-    }
-}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     if (pickerView.tag==1) {
      
-        [[[CurrencyConverter converterExists] exr] home] = [[ExchangeRate currencyArray] objectAtIndex:(row+1)];
-        
+        [[CurrencyConverter converterExists] setFirstCurrency:[NSNumber numberWithLong:row]];
+       
         
         //code for first pickerview
         
     }else if(pickerView.tag==2){
+        [[CurrencyConverter converterExists] setSecondCurrency:[NSNumber numberWithLong:row]];
+        
         
         //code for second pickerview 
     }
@@ -111,13 +78,13 @@
         NSLog(@"No picker view");
     }
 }
-- (IBAction)oneBoxBegin:(id)sender {
-    [self.textBoxOne setText:@""];
+
+- (IBAction)edit:(id)sender {
+    NSNumberFormatter* fey = [[NSNumberFormatter alloc] init];
+    [[CurrencyConverter converterExists] convert:[fey numberFromString:self.textBoxOne.text]];
+    [self.resultLabel setText:[[CurrencyConverter converterExists] convert:[fey numberFromString:self.textBoxOne.text]]];
 }
 
-- (IBAction)twoBoxBegin:(id)sender {
-    [self.textBoxTwo setText:@""];
-}
 
 
 @end
