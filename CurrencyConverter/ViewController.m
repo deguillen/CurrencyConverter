@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "CurrencyConverter.h"
+
 
 @interface ViewController ()
 
@@ -19,11 +19,11 @@
     [super viewDidLoad];
    
     [self.textBoxOne setKeyboardType: UIKeyboardTypeDecimalPad];
-   
+    
+    self.currentRate = [[ExchangeRate alloc] initWithHome: [[ExchangeRate currencyArray] objectAtIndex:0] other:[[ExchangeRate currencyArray] objectAtIndex:0]];
     self.pickerOne.tag = 1;
     self.pickerTwo.tag = 2;
-    [[CurrencyConverter converterExists] setFirstCurrency:[NSNumber numberWithLong:0]];
-    [[CurrencyConverter converterExists] setSecondCurrency:[NSNumber numberWithLong:0]];
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -63,13 +63,13 @@
 {
     if (pickerView.tag==1) {
      
-        [[CurrencyConverter converterExists] setFirstCurrency:[NSNumber numberWithLong:row]];
+        self.currentRate.home = [[ExchangeRate currencyArray] objectAtIndex:row];
        
         
         //code for first pickerview
         
     }else if(pickerView.tag==2){
-        [[CurrencyConverter converterExists] setSecondCurrency:[NSNumber numberWithLong:row]];
+        self.currentRate.foriegn = [[ExchangeRate currencyArray] objectAtIndex:row];
         
         
         //code for second pickerview 
@@ -81,8 +81,8 @@
 
 - (IBAction)edit:(id)sender {
     NSNumberFormatter* fey = [[NSNumberFormatter alloc] init];
-    [[CurrencyConverter converterExists] convert:[fey numberFromString:self.textBoxOne.text]];
-    [self.resultLabel setText:[[CurrencyConverter converterExists] convert:[fey numberFromString:self.textBoxOne.text]]];
+    
+    [self.resultLabel setText:[self.currentRate convert:[fey numberFromString:self.textBoxOne.text]]];
 }
 
 

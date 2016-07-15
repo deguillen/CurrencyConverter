@@ -13,14 +13,14 @@
 static NSMutableArray* pastConversions; 
 static NSArray* array;
 
-+(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b; {
-    ExchangeRate* er = [[ExchangeRate alloc] init];
-    if(er) {
+-(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b; {
+    self= [super init];
+    if(self) {
+        self.home = a;
+        self.foriegn = b;
         
-        er.home = a;
-        er.foriegn = b;
     }
-    return er;
+    return self; 
     
 }
 
@@ -48,8 +48,10 @@ static NSArray* array;
                                                             NSDictionary *dict = (NSDictionary*)obj;
                                         
                                                             NSNumberFormatter* f = [[NSNumberFormatter alloc] init];
-                                        
-                                                            self.rate = [f numberFromString:[[[[dict objectForKey:@"query"] objectForKey:@"results"] objectForKey:@"rate"] objectForKey:@"Rate"]];
+                                                            
+                                                            
+                                                            
+                                                    self.rate = [f numberFromString:[[[[dict objectForKey:@"query"] objectForKey:@"results"] objectForKey:@"rate"] objectForKey:@"Rate"]];
                                                             NSLog(@" rate is %@",[self.rate stringValue]);
                                                             
                                                         }else{
@@ -75,14 +77,40 @@ static NSArray* array;
 }
 +(NSArray*) currencyArray {
     if(!array) {
-        array = [NSArray arrayWithObjects: [Currency initWithName:@"US Dollar" code:@"USD" symbol:@"$" decimalPlaces: [NSNumber numberWithLong:2]],
-         [Currency initWithName:@"Euro" code:@"EUR" symbol:@"€" decimalPlaces: [NSNumber numberWithLong:2]],
-         [Currency initWithName:@"British Pound" code:@"GBP" symbol:@"£" decimalPlaces: [NSNumber numberWithLong:2]],
-         [Currency initWithName:@"Japanese Yen" code:@"JPY" symbol:@"‎¥" decimalPlaces: [NSNumber numberWithLong:0]],
-        [Currency initWithName:@"Norwegian Krone" code:@"NOK" symbol:@"‎kr" decimalPlaces: [NSNumber numberWithLong:0]],nil];
+        array = [NSArray arrayWithObjects: [[Currency alloc]initWithName:@"US Dollar" code:@"USD" symbol:@"$" decimalPlaces: [NSNumber numberWithLong:2]],
+         [[Currency alloc] initWithName:@"Euro" code:@"EUR" symbol:@"€" decimalPlaces: [NSNumber numberWithLong:2]],
+         [[Currency alloc] initWithName:@"British Pound" code:@"GBP" symbol:@"£" decimalPlaces: [NSNumber numberWithLong:2]],
+         [[Currency alloc] initWithName:@"Japanese Yen" code:@"JPY" symbol:@"‎¥" decimalPlaces: [NSNumber numberWithLong:0]],
+        [[Currency alloc] initWithName:@"Norwegian Krone" code:@"NOK" symbol:@"‎kr" decimalPlaces: [NSNumber numberWithLong:0]],nil];
     }
     return array;
 }
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    
+    [encoder encodeObject: self.date forKey: @"flerm"];
+    
+}
+- (ExchangeRate*)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if(self){
+        self.date =  [decoder decodeObjectOfClass: [ExchangeRate class] forKey: @"flerm"];
+    }
+    return self;
+}
+-(NSString*) convert: (NSNumber*) n {
+    
+    
+    NSLog(@"%@", self.url); 
+    [self updateRate];
+    
+    return [self.foriegn.formatter stringFromNumber:[NSNumber numberWithFloat:[n floatValue] * [self.rate floatValue]]];
+    
+    
+    
+}
+
 
 @end
 

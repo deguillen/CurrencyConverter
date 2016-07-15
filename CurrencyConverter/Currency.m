@@ -10,19 +10,20 @@
 
 @implementation Currency
 
-+(Currency*) initWithName: (NSString*) aName code: (NSString*) aCode symbol: (NSString*) aSymbol decimalPlaces: (NSNumber*) aPlace {
+-(Currency*) initWithName: (NSString*) aName code: (NSString*) aCode symbol: (NSString*) aSymbol decimalPlaces: (NSNumber*) aPlace {
     
-    Currency* curr = [[Currency alloc] init];
-    curr.name = aName;
-    curr.alphaCode = aCode;
-    curr.formatter = [[NSNumberFormatter alloc] init];
-    curr.formatter.currencySymbol = aSymbol;
-    curr.formatter.numberStyle = kCFNumberFormatterCurrencyStyle;
-    [curr.formatter setMaximumFractionDigits:[aPlace integerValue]];
-    [curr.formatter setMinimumFractionDigits:[aPlace integerValue]];
+    self = [super init];
+    if(self) {
+    self.name = aName;
+    self.alphaCode = aCode;
+    self.formatter = [[NSNumberFormatter alloc] init];
+    self.formatter.currencySymbol = aSymbol;
+    self.formatter.numberStyle = kCFNumberFormatterCurrencyStyle;
+    [self.formatter setMaximumFractionDigits:[aPlace integerValue]];
+        [self.formatter setMinimumFractionDigits:[aPlace integerValue]]; }
     //formatter code
     
-    return curr;
+    return self;
 }
 -(NSString*) format: (NSNumber*) quantity {
     return [self.formatter stringFromNumber:quantity];

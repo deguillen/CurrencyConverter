@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSString* symbol;
 @property (strong, nonatomic) NSNumberFormatter* formatter;
 
-+(Currency*) initWithName: (NSString*) aName code: (NSString*) aCode symbol: (NSString*) aSymbol decimalPlaces: (NSNumber*) aPlace;
+-(Currency*) initWithName: (NSString*) aName code: (NSString*) aCode symbol: (NSString*) aSymbol decimalPlaces: (NSNumber*) aPlace;
 -(NSString*) format: (NSNumber*) quantity;
 
 @end

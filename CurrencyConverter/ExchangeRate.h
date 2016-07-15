@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Currency.h"
-@interface ExchangeRate : NSObject
+@interface ExchangeRate : NSObject <NSCoding>
 
 @property (strong, nonatomic) Currency* home;
 @property (strong, nonatomic) Currency* foriegn;
@@ -29,9 +29,9 @@
 -(NSString*) name;
 -(NSString*) description; */
 
- +(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b;
+ -(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b;
 
-//convert currency method 
+-(NSString*) convert: (NSNumber*) n; 
  
 @end
 

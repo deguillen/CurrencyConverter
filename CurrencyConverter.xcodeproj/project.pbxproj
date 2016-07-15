@@ -13,7 +13,6 @@
 		654AA61F1D353D8F00B825AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654AA61D1D353D8F00B825AA /* Main.storyboard */; };
 		654AA6211D353D8F00B825AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 654AA6201D353D8F00B825AA /* Assets.xcassets */; };
 		654AA6241D353D8F00B825AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 654AA6221D353D8F00B825AA /* LaunchScreen.storyboard */; };
-		654AA62D1D3578F200B825AA /* CurrencyConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 654AA62C1D3578F200B825AA /* CurrencyConverter.m */; };
 		654AA6301D36883F00B825AA /* Currency.m in Sources */ = {isa = PBXBuildFile; fileRef = 654AA62F1D36883F00B825AA /* Currency.m */; };
 		654AA6331D3689DD00B825AA /* ExchangeRate.m in Sources */ = {isa = PBXBuildFile; fileRef = 654AA6321D3689DD00B825AA /* ExchangeRate.m */; };
 /* End PBXBuildFile section */
@@ -29,8 +28,6 @@
 		654AA6201D353D8F00B825AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		654AA6231D353D8F00B825AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		654AA6251D353D8F00B825AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		654AA62B1D3578F200B825AA /* CurrencyConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyConverter.h; sourceTree = "<group>"; };
-		654AA62C1D3578F200B825AA /* CurrencyConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrencyConverter.m; sourceTree = "<group>"; };
 		654AA62E1D36883F00B825AA /* Currency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Currency.h; sourceTree = "<group>"; };
 		654AA62F1D36883F00B825AA /* Currency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Currency.m; sourceTree = "<group>"; };
 		654AA6311D3689DD00B825AA /* ExchangeRate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExchangeRate.h; sourceTree = "<group>"; };
@@ -83,8 +80,6 @@
 		654AA6141D353D8F00B825AA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				654AA62B1D3578F200B825AA /* CurrencyConverter.h */,
-				654AA62C1D3578F200B825AA /* CurrencyConverter.m */,
 				654AA6311D3689DD00B825AA /* ExchangeRate.h */,
 				654AA6321D3689DD00B825AA /* ExchangeRate.m */,
 				654AA6151D353D8F00B825AA /* main.m */,
@@ -165,7 +160,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				654AA61C1D353D8F00B825AA /* ViewController.m in Sources */,
-				654AA62D1D3578F200B825AA /* CurrencyConverter.m in Sources */,
 				654AA6331D3689DD00B825AA /* ExchangeRate.m in Sources */,
 				654AA6191D353D8F00B825AA /* AppDelegate.m in Sources */,
 				654AA6161D353D8F00B825AA /* main.m in Sources */,

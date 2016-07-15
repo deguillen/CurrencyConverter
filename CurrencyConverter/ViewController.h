@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ExchangeRate.h"
+#import "Currency.h" 
 
 @interface ViewController : UIViewController <UIPickerViewDataSource,UIPickerViewDelegate>
+
+@property ExchangeRate* currentRate;
 
 @property (weak, nonatomic) IBOutlet UITextField *textBoxOne;
 
