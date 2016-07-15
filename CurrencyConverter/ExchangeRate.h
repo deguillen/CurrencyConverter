@@ -15,12 +15,13 @@
 @property (strong, nonatomic) NSNumber* rate;
 @property (strong, nonatomic) NSDate* date;
 @property (strong, nonatomic) NSURL* url;
+@property (strong, nonatomic) NSString* shortcut;
 
 +(NSArray*) currencyArray;
++(void) unAr; 
++(void) ar;
++(void) updateAllRates; 
 
-
-
--(void) changeCurrency: (Currency*) a other: (Currency*) b;
 
  -(bool) updateRate;
 /* -(NSString*) exchangeToHome: (NSNumber*) value;
@@ -31,7 +32,8 @@
 
  -(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b;
 
--(NSString*) convert: (NSNumber*) n; 
+-(NSString*) convert: (NSNumber*) n;
+
  
 @end
 

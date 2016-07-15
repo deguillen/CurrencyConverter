@@ -16,7 +16,11 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    
+   
    
     [self.textBoxOne setKeyboardType: UIKeyboardTypeDecimalPad];
     
@@ -42,7 +46,7 @@
 }
 
 - (IBAction)refreshPressed:(id)sender {
-    //refresh code
+    [ExchangeRate updateAllRates]; 
 }
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

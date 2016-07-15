@@ -10,25 +10,26 @@
 
 @implementation ExchangeRate
 
-static NSMutableArray* pastConversions; 
+
 static NSArray* array;
+static NSMutableArray* pastRates;
+
 
 -(ExchangeRate*) initWithHome: (Currency*) a other: (Currency*) b; {
     self= [super init];
     if(self) {
         self.home = a;
         self.foriegn = b;
+        self.shortcut = [NSString stringWithFormat:@"%@%@", a.alphaCode, b.alphaCode];
         
     }
     return self; 
     
 }
 
--(void) changeCurrency: (Currency*) a other: (Currency*) b {
-    self.home = a;
-    self.foriegn = b;
+
     
-}
+
 -(bool) updateRate {
     
     bool successful =YES;
@@ -52,7 +53,10 @@ static NSArray* array;
                                                             
                                                             
                                                     self.rate = [f numberFromString:[[[[dict objectForKey:@"query"] objectForKey:@"results"] objectForKey:@"rate"] objectForKey:@"Rate"]];
-                                                            NSLog(@" rate is %@",[self.rate stringValue]);
+                                                            
+                                                            NSLog(@" rate in updateRate is %@",[self.rate stringValue]);
+                                                            
+                                                            self.date = [NSDate date];
                                                             
                                                         }else{
                                                     NSLog(@"Not a dictionary.");
@@ -64,7 +68,7 @@ static NSArray* array;
                                                          encoding: NSUTF8StringEncoding]);*/
                                                     }];
         [task resume];
-    
+        
    
     
     
@@ -99,18 +103,58 @@ static NSArray* array;
     }
     return self;
 }
--(NSString*) convert: (NSNumber*) n {
+-(NSString*) convert: (NSNumber*) n  {
+    self.rate = nil;
+    for(long i = [pastRates count] -1; i>=0; i--) {
+        if([[[pastRates objectAtIndex:i] shortcut] isEqualToString:[self shortcut]]) {
+            self.rate =[[pastRates objectAtIndex:i] rate];
+            self.date =[[pastRates objectAtIndex:i] date];
+            break;
+        }
+    }
     
     
-    NSLog(@"%@", self.url); 
-    [self updateRate];
+    if(!self.rate || [self.date timeIntervalSinceNow] >= 259200) {
+        [self updateRate];
+        while(!self.rate) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]]; //ohhh
+        }
+        
+        
+        [pastRates addObject:self];
+        NSLog(@"after addObject: %@",[self.rate stringValue]);
+        
+        
+    }
+    
+    
+    
     
     return [self.foriegn.formatter stringFromNumber:[NSNumber numberWithFloat:[n floatValue] * [self.rate floatValue]]];
     
     
     
 }
++(void) unAr {
+    if(!pastRates) {
+    NSString* archive = [NSString stringWithFormat:@"%@/Documents/ratesArchive", NSHomeDirectory()];
+    pastRates = [[NSKeyedUnarchiver unarchiveObjectWithFile:archive] mutableCopy];
+        NSLog(@"unarchived");
+    }
+}
 
++(void) ar {
+    NSString* archive = [NSString stringWithFormat:@"%@/Documents/ratesArchive", NSHomeDirectory()];
+    
+    [NSKeyedArchiver archiveRootObject:pastRates toFile: archive];
+    NSLog(@"saved");
+}
++(void) updateAllRates {
+    for(long i = [pastRates count] -1; i>=0; i--) {
+        [[pastRates objectAtIndex:i] updateRate]; 
+    }
+    
+}
 
 @end
 

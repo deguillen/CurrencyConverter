@@ -25,5 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel;
 
+@property (strong, nonatomic) NSMutableArray* pastRates; 
+
 @end
 
