@@ -29,5 +29,23 @@
     return [self.formatter stringFromNumber:quantity];
 }
 
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    
+    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.alphaCode forKey:@"alphacode"];
+    [encoder encodeObject:self.formatter forKey:@"formatter"];
+}
+- (Currency*)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if(self){
+        self.name = [decoder decodeObjectOfClass:[Currency class] forKey:@"name"];
+        self.alphaCode = [decoder decodeObjectOfClass:[Currency class] forKey:@"alphacode"];
+        self.formatter = [decoder decodeObjectOfClass:[Currency class] forKey:@"formatter"];
+    }
+    return self;
+}
+
 
 @end

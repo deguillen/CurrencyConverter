@@ -20,14 +20,16 @@ static NSMutableArray* pastRates;
     if(self) {
         self.home = a;
         self.foriegn = b;
-        self.shortcut = [NSString stringWithFormat:@"%@%@", a.alphaCode, b.alphaCode];
+        
         
     }
     return self; 
     
 }
 
-
+-(NSString*) shortcut {
+    return [NSString stringWithFormat:@"%@%@", self.home.alphaCode, self.foriegn.alphaCode];
+}
     
 
 -(bool) updateRate {
@@ -92,25 +94,42 @@ static NSMutableArray* pastRates;
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     
-    [encoder encodeObject: self.date forKey: @"flerm"];
-    
+    [encoder encodeObject: self.date forKey: @"date"];
+    [encoder encodeObject: self.rate forKey: @"rate"];
+    [encoder encodeObject: self.home forKey: @"home"];
+    [encoder encodeObject: self.foriegn forKey: @"foriegn"];
 }
 - (ExchangeRate*)initWithCoder:(NSCoder *)decoder
 {
     self = [super init];
     if(self){
-        self.date =  [decoder decodeObjectOfClass: [ExchangeRate class] forKey: @"flerm"];
+        self.date =  [decoder decodeObjectOfClass: [ExchangeRate class] forKey: @"date"];
+        self.rate = [decoder decodeObjectOfClass:[ExchangeRate class] forKey:@"rate"];
+        self.home = [decoder decodeObjectOfClass:[ExchangeRate class] forKey:@"home"];
+        self.foriegn = [decoder decodeObjectOfClass:[ExchangeRate class] forKey:@"foriegn"];
     }
     return self;
 }
 -(NSString*) convert: (NSNumber*) n  {
+    if(!pastRates)
+    {
+        pastRates = [[NSMutableArray alloc] init];
+        
+    }
+    
     self.rate = nil;
-    for(long i = [pastRates count] -1; i>=0; i--) {
+    if([pastRates count] == 1) {
+        
+    }
+    for(long i = [pastRates count] -1; i>=0 && !self.rate; i--) {
         if([[[pastRates objectAtIndex:i] shortcut] isEqualToString:[self shortcut]]) {
             self.rate =[[pastRates objectAtIndex:i] rate];
             self.date =[[pastRates objectAtIndex:i] date];
-            break;
+            NSLog(@"self.rate : %@", [self shortcut]);
+            
         }
+        
+        
     }
     
     
@@ -121,8 +140,11 @@ static NSMutableArray* pastRates;
         }
         
         
-        [pastRates addObject:self];
-        NSLog(@"after addObject: %@",[self.rate stringValue]);
+        [pastRates addObject:[self copy]];
+         
+         
+       
+        
         
         
     }
@@ -139,7 +161,7 @@ static NSMutableArray* pastRates;
     if(!pastRates) {
     NSString* archive = [NSString stringWithFormat:@"%@/Documents/ratesArchive", NSHomeDirectory()];
     pastRates = [[NSKeyedUnarchiver unarchiveObjectWithFile:archive] mutableCopy];
-        NSLog(@"unarchived");
+        NSLog(@"unarchived: %@", [[pastRates objectAtIndex:0] shortcut]);
     }
 }
 
@@ -154,6 +176,16 @@ static NSMutableArray* pastRates;
         [[pastRates objectAtIndex:i] updateRate]; 
     }
     
+}
+-(id) copyWithZone:(NSZone *) zone {
+    ExchangeRate* object = [[ExchangeRate alloc] init];
+    object.rate = self.rate; 
+    object.home = self.home;
+    object.foriegn = self.foriegn; 
+    object.date = self.date;
+    object.shortcut = self.shortcut;
+    
+    return object;
 }
 
 @end

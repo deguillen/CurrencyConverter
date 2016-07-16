@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    
+    [ExchangeRate unAr];
     
    
    

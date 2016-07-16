@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Currency.h"
-@interface ExchangeRate : NSObject <NSCoding>
+@interface ExchangeRate : NSObject <NSCoding, NSCopying>
 
 @property (strong, nonatomic) Currency* home;
 @property (strong, nonatomic) Currency* foriegn;
@@ -22,7 +22,7 @@
 +(void) ar;
 +(void) updateAllRates; 
 
-
+-(NSString*) shortcut; 
  -(bool) updateRate;
 /* -(NSString*) exchangeToHome: (NSNumber*) value;
 -(NSString*) exchangeToForeign: (NSNumber*) value;
